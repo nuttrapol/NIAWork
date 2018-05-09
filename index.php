@@ -17,7 +17,7 @@ if ((isset($_POST['tid'])) & (isset($_POST['tokenid'])) & (isset($_POST['submit'
 }
 ?>
 <br>
-<h1>Pantip Retreival System</h1>
+<h1>Pantip Retrieval System</h1>
 <hr>
 
 <form action="index.php" method="post">
