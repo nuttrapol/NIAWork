@@ -31,7 +31,7 @@ echo "connectdbpw: " . $connectstr_dbpassword;
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;*/
 
 
-/*if (mysqli_query($links, '
+if (mysqli_query($links, '
 CREATE TABLE Products (
 `Id` INT NOT NULL AUTO_INCREMENT ,
 `ProductName` VARCHAR(200) NOT NULL ,
@@ -41,7 +41,7 @@ PRIMARY KEY (`Id`)
 );
 ')) {
 printf("Table created\n");
-}*/
+}
 
 mysqli_close($link);
 ?>
