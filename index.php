@@ -27,6 +27,18 @@ if (!$link) {
 echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
 
+if (mysqli_query($links, '
+CREATE TABLE Products (
+`Id` INT NOT NULL AUTO_INCREMENT ,
+`ProductName` VARCHAR(200) NOT NULL ,
+`Color` VARCHAR(50) NOT NULL ,
+`Price` DOUBLE NOT NULL ,
+PRIMARY KEY (`Id`)
+);
+')) {
+printf("Table created\n");
+}
+
 mysqli_close($link);
 ?>
 <html>
