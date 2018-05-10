@@ -31,7 +31,7 @@ echo "connectdbpw: " . $connectstr_dbpassword. "\n";
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;*/
 
 
-if (mysqli_query($links, '
+/*if (mysqli_query($links, '
 CREATE TABLE Products (
 `Id` INT NOT NULL AUTO_INCREMENT ,
 `ProductName` VARCHAR(200) NOT NULL ,
@@ -43,7 +43,13 @@ PRIMARY KEY (`Id`)
 echo "Table created\n";
 }else{
 echo "Error\n";
-}
+}*/
+$q = "CREATE TABLE Products (`Id` INT NOT NULL AUTO_INCREMENT ,`ProductName` VARCHAR(200) NOT NULL ,`Color` VARCHAR(50) NOT NULL ,
+`Price` DOUBLE NOT NULL ,PRIMARY KEY (`Id`));";
+$result=$link->query($q);                    
+                        if(!$result){
+                            echo "Select failed. Error: ".$link->error ;
+                        }
 
 mysqli_close($link);
 ?>
