@@ -23,10 +23,10 @@ if (!$link) {
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
-echo "connectdbhost: " . $connectstr_dbhost;
-echo "connectdbname: " . $connectstr_dbname;
-echo "connectdbusername: " . $connectstr_dbusername;
-echo "connectdbpw: " . $connectstr_dbpassword;
+echo "connectdbhost: " . $connectstr_dbhost. "\n";
+echo "connectdbname: " . $connectstr_dbname. "\n";
+echo "connectdbusername: " . $connectstr_dbusername. "\n";
+echo "connectdbpw: " . $connectstr_dbpassword. "\n";
 /*echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
 echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;*/
 
@@ -40,7 +40,9 @@ CREATE TABLE Products (
 PRIMARY KEY (`Id`)
 );
 ')) {
-printf("Table created\n");
+echo "Table created\n";
+}else{
+echo "Error\n";
 }
 
 mysqli_close($link);
