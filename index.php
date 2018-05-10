@@ -23,13 +23,13 @@ if (!$link) {
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
-
-echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
-echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
 echo "connectdbhost: " . $connectstr_dbhost;
 echo "connectdbname: " . $connectstr_dbname;
 echo "connectdbusername: " . $connectstr_dbusername;
 echo "connectdbpw: " . $connectstr_dbpassword;
+/*echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;*/
+
 
 /*if (mysqli_query($links, '
 CREATE TABLE Products (
