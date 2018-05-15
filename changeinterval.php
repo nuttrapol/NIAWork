@@ -6,14 +6,14 @@ set_time_limit(0);
 
 function change_time_interval($hour){
     global $rootdir;
-    
+
     //Change Time_interval in pantip_config file
-    $str = file_get_contents($rootdir . "/wwwroot/file/pantip_config.json");
-    echo "Read file : " . $rootdir . "/wwwroot/file/pantip_config.json";
+    $str = file_get_contents($rootdir . "/file/pantip_config.json");
+    echo "Read file : " . $rootdir . "/file/pantip_config.json";
     $json = json_decode($str, true);
     $json['time_interval'] = $hour;
     $newJson = json_encode($json);
-    file_put_contents($rootdir . "/wwwroot/file/pantip_config.json", $newJson);
+    file_put_contents($rootdir . "/file/pantip_config.json", $newJson);
 
 
     echo "Trigger the update_script";

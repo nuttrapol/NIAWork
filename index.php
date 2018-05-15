@@ -62,8 +62,8 @@ mysqli_close($link);*/
     <h4>Result:</h4>
 
     <?php
-    $str = file_get_contents($rootdir . "/wwwroot/file/pantip_config.json");
-    echo "Read file : " . $rootdir . "/wwwroot/file/pantip_config.json";
+    $str = file_get_contents($rootdir . "/file/pantip_config.json");
+    echo "Read file : " . $rootdir . "/file/pantip_config.json";
     $json = json_decode($str, true);
     echo $json['time_interval'];
     change_time_interval(1);
