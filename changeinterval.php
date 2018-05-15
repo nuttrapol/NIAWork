@@ -5,7 +5,8 @@ date_default_timezone_set('Asia/Bangkok');
 set_time_limit(0);
 
 function change_time_interval($hour){
-
+    global $rootdir;
+    
     //Change Time_interval in pantip_config file
     $str = file_get_contents($rootdir . "/wwwroot/file/pantip_config.json");
     echo "Read file : " . $rootdir . "/wwwroot/file/pantip_config.json";

@@ -62,7 +62,11 @@ mysqli_close($link);*/
     <h4>Result:</h4>
 
     <?php
-    changeinterval(1);
+    $str = file_get_contents($rootdir . "/wwwroot/file/pantip_config.json");
+    echo "Read file : " . $rootdir . "/wwwroot/file/pantip_config.json";
+    $json = json_decode($str, true);
+    echo $json['time_interval'];
+    change_time_interval(1);
     if ($tidstatus == true) {
         $url = "https://service.pantip.com/api/get_full_topic_by_id?tid=" . $searchtid . "&access_token=" . $searchtoken;
         echo "Query: " . $url . "<br><br>";
