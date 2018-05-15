@@ -36,7 +36,6 @@
 
     function searchQ($curQ)
     {
-        global $link;
         $key = extractString($curQ, "{key=", ",");
         $key_array = explode("&", $key);
         $sdate = extractString($curQ, "sdate=", ",");
@@ -55,19 +54,7 @@
         echo "---> StartTime is: " . $sdate . "<br>";
         echo "---> Endtime is: " . $edate . "<br>";
         echo "---> Room is: " . $room . "<br>";
-        echo "<br><br>";
-
-        $sqlst = "SELECT tid,title,description,created_time FROM topic WHERE ((title like '%" . $key_array[0] . "%') or (description like '%" . $key_array[0] . "%') or (tag like '%" . $key_array[0] . "%')) and (created_time>='" . $sdate . " 00:00:00' and created_time<='" . $edate . " 23:59:59')";
-        $result = $link->query($sqlst);
-        echo "Database Query: " . $sqlst . "<br>";
-        echo "Number of posts: " . $result->num_rows . "<br><br>";
-        while ($array = $result->fetch_assoc()) {
-            echo "Topic :" . $array['tid'] . "<br>Create At : " . $array['created_time'] ."<br>Title : " . $array['title'] . "<br><br>";
-        }
-
-        echo "<br><hr><br>";
-
-
+        echo "<br>";
     }
 
     function addRoomQ($curQ)
@@ -75,7 +62,7 @@
         $room = extractString($curQ, "{name=", "}");
         echo "---> Query type: ADD ROOM<br>";
         echo "---> Room Name is: " . $room . "<br>";
-        echo "<br><hr><br>";
+        echo "<br>";
     }
 
     ?>
@@ -95,7 +82,6 @@
 
     Your queries:<br>
     <?php
-
     echo $query . "<br><hr><br>";
     //split lines
     $query_array = explode("\n", $query);
