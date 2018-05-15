@@ -22,7 +22,7 @@ mysqli_close($link);*/
 
     <?php
     echo "token = 5c124659ff8dc666396a0088c7751d2b1f29deae";
-    echo "tid = 31600762"
+    echo "tid = 31600762";
     if ((isset($_POST['tid'])) & (isset($_POST['tokenid'])) & (isset($_POST['submit']))) {
         $searchtid = $_POST['tid'];
         $searchtoken = $_POST['tokenid'];
