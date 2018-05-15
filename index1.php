@@ -17,7 +17,7 @@ foreach ($_SERVER as $key => $value) {
 }
 
 //$link = mysqli_connect($connectstr_dbhost, $connectstr_dbusername, $connectstr_dbpassword,$connectstr_dbname);
-$link = mysqli_connect("127.0.0.1:53388","azure", "6#vWHD_$", "localdb");*/
+$link = mysqli_connect("127.0.0.1:53388","azure", "6#vWHD_$", "localdb");
 
 echo $connectstr_dbhost . "<br>";
 echo $connectstr_dbusername . "<br>";
