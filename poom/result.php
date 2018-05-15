@@ -46,7 +46,7 @@
         echo "---> Query type: SEARCH<br>";
         echo "---> Keyword is: ";
         for ($k = 1; $k <= count($key_array); $k++) {
-            echo $key_array[$k-1];
+            echo $key_array[$k - 1];
             if (isset($key_array[$k])) {
                 echo " , ";
             }
@@ -55,17 +55,53 @@
         echo "---> StartTime is: " . $sdate . "<br>";
         echo "---> Endtime is: " . $edate . "<br>";
         echo "---> Room is: " . $room . "<br>";
-        echo "<br><br>";
 
-        $sqlst = "SELECT tid,title,description,created_time FROM topic WHERE ((title like '%" . $key_array[0] . "%') or (description like '%" . $key_array[0] . "%') or (tag like '%" . $key_array[0] . "%')) and (created_time>='" . $sdate . " 00:00:00' and created_time<='" . $edate . " 23:59:59')";
-        $result = $link->query($sqlst);
-        echo "Database Query: " . $sqlst . "<br>";
-        echo "Number of posts: " . $result->num_rows . "<br><br>";
+        $topicRet_array = [];
+        $topicQ = "SELECT tid,title,description,created_time 
+                  FROM topic 
+                  
+                  WHERE ((title like '%" . $key_array[0] . "%') 
+                  or (description like '%" . $key_array[0] . "%') 
+                  or (tag like '%" . $key_array[0] . "%')) 
+                  
+                  and (created_time>='" . $sdate . " 00:00:00' 
+                  and created_time<='" . $edate . " 23:59:59')";
+        $result = $link->query($topicQ);
+        //echo "Database Topic Query: " . $topicQ . "<br>";
+        echo "---> Number of topics: " . $result->num_rows . "<br><br>";
+        echo "-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-<br><br>";
         while ($array = $result->fetch_assoc()) {
-            echo "Topic :" . $array['tid'] . "<br>Create At : " . $array['created_time'] ."<br>Title : " . $array['title'] . "<br><br>";
+            echo "Topic :" . $array['tid'] . "<br>Create At : " . $array['created_time'] . "<br>Title : " . $array['title'] . "<br>";
+            array_push($topicRet_array, $array['tid']);
+            $commentQ =  "SELECT cid,title,description,created_time,comment_no 
+                          FROM comment 
+                  
+                          WHERE tid ='" . $array['tid'] . "'
+                        
+                          order by comment_no asc";
+            $resultComment = $link->query($commentQ);
+            //echo "Database Comment Query: " . $commentQ . "<br>";
+            echo "Number of comments: " . $resultComment->num_rows . "<br><br>";
+            while ($array = $resultComment->fetch_assoc()) {
+                echo "--------> CommentID :" . $array['cid'] . "<br>--------> Title : " . $array['title'] . "<br>";
+                $replyQ =  "SELECT rid,status,description,created_time 
+                          FROM reply
+                  
+                          WHERE cid ='" . $array['cid'] . "'
+                          AND status = 'normal'
+                        
+                          order by created_time asc";
+                $resultReply = $link->query($replyQ);
+                //echo "--------> Database Reply Query: " . $replyQ . "<br>";
+                echo "-------->Number of replies: " . $resultReply->num_rows . "<br>";
+                while ($array = $resultReply->fetch_assoc()) {
+                    echo "----------------> ReplyID :" . $array['rid'] . "<br>";
+                }
+                echo "<br><br>";
+            }
+            //echo "FFF: ".$topicRet_array[0];
+            echo "<br>-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-<br><br>";
         }
-
-        echo "<br><hr><br>";
 
 
     }
