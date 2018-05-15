@@ -72,7 +72,7 @@ mysqli_close($link);*/
     <h1>Pantip Retrieval System</h1>
     <hr>
 
-    <form action="index.php" method="post">
+    <form action="index1.php" method="post">
         <h4>Search Filter (beta)</h4>
 
         Enter TID from Pantip:<br>
