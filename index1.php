@@ -1,6 +1,35 @@
 <?php
 session_start();
-require_once('connect.php');
+$connectstr_dbhost = '';
+$connectstr_dbname = '';
+$connectstr_dbusername = '';
+$connectstr_dbpassword = '';
+$rootdir = $_SERVER['DOCUMENT_ROOT'];
+foreach ($_SERVER as $key => $value) {
+    if (strpos($key, "MYSQLCONNSTR_localdb") !== 0) {
+        continue;
+    }
+    
+    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
+}
+
+$link = mysqli_connect($connectstr_dbhost, $connectstr_dbusername, $connectstr_dbpassword,$connectstr_dbname);
+//$link = mysqli_connect("127.0.0.1:53388","azure", "6#vWHD_$", "localdb");*/
+
+echo $connectstr_dbhost . "<br>";
+echo $connectstr_dbusername . "<br>";
+echo $connectstr_dbpassword . "<br>";
+echo $connectstr_dbname . "<br>";
+
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
 date_default_timezone_set('Asia/Bangkok');
 
 /*echo "connectdbhost: " . $connectstr_dbhost. "\n";
@@ -25,7 +54,7 @@ mysqli_close($link);*/
     <?php
     echo "token = 5c124659ff8dc666396a0088c7751d2b1f29deae<br>";
     echo "tid = 31600762";
-    include "changeinterval.php";
+    //include "changeinterval.php";
     if ((isset($_POST['tid'])) & (isset($_POST['tokenid'])) & (isset($_POST['submit']))) {
         $searchtid = $_POST['tid'];
         $searchtoken = $_POST['tokenid'];
@@ -64,7 +93,7 @@ mysqli_close($link);*/
     <h4>Result:</h4>
 
     <?php
-    change_time_interval(1);
+    //change_time_interval(1);
     if ($tidstatus == true) {
         $url = "https://service.pantip.com/api/get_full_topic_by_id?tid=" . $searchtid . "&access_token=" . $searchtoken;
         echo "Query: " . $url . "<br><br>";
